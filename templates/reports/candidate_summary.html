@@ -1,0 +1,56 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Candidate Summary - {{ candidate.name }}</title>
+            <style>
+                body { font-family: Arial, sans-serif; margin: 40px; }
+                .header { border-bottom: 2px solid #4CAF50; padding-bottom: 20px; }
+                .section { margin: 20px 0; }
+                .skills { display: flex; flex-wrap: wrap; gap: 10px; }
+                .skill-tag { background: #e3f2fd; padding: 5px 10px; border-radius: 15px; }
+            </style>
+        </head>
+        <body>
+            <div class="header">
+                <h1>{{ candidate.name }}</h1>
+                <p><strong>{{ candidate.domain }}</strong> | {{ candidate.experience_years }} years experience</p>
+            </div>
+            
+            {% if ai_summary %}
+            <div class="section">
+                <h2>AI-Generated Summary</h2>
+                <p>{{ ai_summary }}</p>
+            </div>
+            {% endif %}
+            
+            <div class="section">
+                <h2>Skills</h2>
+                <div class="skills">
+                    {% for skill in candidate.skills %}
+                    <span class="skill-tag">{{ skill }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>Experience & Education</h2>
+                <p><strong>Experience:</strong> {{ candidate.experience_years }} years</p>
+                <p><strong>Education:</strong> {{ candidate.education }}</p>
+                <p><strong>Seniority:</strong> {{ candidate.seniority }}</p>
+            </div>
+            
+            {% if include_contact_info %}
+            <div class="section">
+                <h2>Contact Information</h2>
+                <p><strong>Email:</strong> {{ candidate.email }}</p>
+                <p><strong>Phone:</strong> {{ candidate.phone }}</p>
+            </div>
+            {% endif %}
+            
+            <div class="section">
+                <p><em>Report generated on {{ generated_at }}</em></p>
+            </div>
+        </body>
+        </html>
+        

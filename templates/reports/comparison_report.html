@@ -1,0 +1,39 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Top Candidates Comparison</title>
+            <style>
+                body { font-family: Arial, sans-serif; margin: 40px; }
+                .candidates { display: flex; gap: 20px; flex-wrap: wrap; }
+                .candidate { border: 1px solid #ddd; padding: 15px; flex: 1; min-width: 300px; }
+                .match-score { font-size: 24px; color: #4CAF50; font-weight: bold; }
+            </style>
+        </head>
+        <body>
+            <h1>Top Candidates Comparison</h1>
+            <h2>Position: {{ job_requirements.job_title }}</h2>
+            
+            {% if ai_insights %}
+            <div class="section">
+                <h2>AI Insights</h2>
+                <p>{{ ai_insights }}</p>
+            </div>
+            {% endif %}
+            
+            <div class="candidates">
+                {% for candidate in candidates %}
+                <div class="candidate">
+                    <h3>{{ candidate.name }}</h3>
+                    <div class="match-score">{{ candidate.match_score }}% Match</div>
+                    <p><strong>Experience:</strong> {{ candidate.experience_years }} years</p>
+                    <p><strong>Domain:</strong> {{ candidate.domain }}</p>
+                    <p><strong>Top Skills:</strong> {{ candidate.skills[:5]|join(', ') }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <p><em>Report generated on {{ generated_at }}</em></p>
+        </body>
+        </html>
+        
